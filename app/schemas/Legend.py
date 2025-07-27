@@ -1,8 +1,9 @@
 from fastapi import Form, UploadFile, File, HTTPException
+from sqlmodel import SQLModel
+from typing import Annotated, Optional
+from datetime import datetime, date
 
-from typing import Annotated, Union
-from datetime import datetime
-
+from app.schemas import UserRead, CategoryRead, DistrictRead
 
 class LegendCreate:
     def __init__(
@@ -24,6 +25,16 @@ class LegendCreate:
         self.image = image
         self.date = date
 
+class LegendRead(SQLModel):
+    id: int
+    name: str
+    description: str
+    date: date
+    image_url: str
+    
+    publisher: Optional[UserRead]
+    category: Optional[CategoryRead]
+    district: Optional[DistrictRead]
 
 def parse_legend_create(
     name: Annotated[str, Form()],
@@ -59,12 +70,12 @@ class LegendUpdate:
 
 
 def parse_legend_update(
-    name: Annotated[str|None, Form()] = None,
-    description: Annotated[str|None, Form()] = None,
-    date: Annotated[str|None, Form()] = None,
-    category_id: Annotated[int|None, Form()] = None,
-    district_id: Annotated[int|None, Form()] = None,
-    image: Annotated[UploadFile|None, File()] = None
+    name: Annotated[str, Form()] = None,
+    description: Annotated[str, Form()] = None,
+    date: Annotated[str, Form()] = None,
+    category_id: Annotated[int, Form()] = None,
+    district_id: Annotated[int, Form()] = None,
+    image: Annotated[UploadFile, File()] = None
 ) -> LegendUpdate:
     parsed_date = datetime.strptime(date, "%Y-%m-%d").date() if date else None
     return LegendUpdate(name, description, parsed_date, category_id, district_id, image)

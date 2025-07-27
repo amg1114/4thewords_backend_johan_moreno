@@ -1,4 +1,5 @@
-from sqlmodel import Session
+from sqlalchemy.orm import selectinload
+from sqlmodel import Session, select
 from fastapi import HTTPException
 
 from app.models import Legend, User
@@ -50,6 +51,7 @@ class LegendService:
 
         return legend
     
+    @staticmethod
     def delete(legend_id: int):
         with Session(engine) as session:
             legend = session.get(Legend, legend_id)
@@ -63,3 +65,17 @@ class LegendService:
             session.commit()
             
             return {"detail": "Legend deleted successfully"}
+        
+    @staticmethod
+    def get_all():
+        with Session(engine) as session:
+            legends = select(Legend).options(
+                selectinload(Legend.publisher),
+                selectinload(Legend.district),
+                selectinload(Legend.category)
+            )
+            results = session.exec(legends).all()
+            if not results:
+                raise HTTPException(status_code=404, detail="No legends found")
+            
+            return results
