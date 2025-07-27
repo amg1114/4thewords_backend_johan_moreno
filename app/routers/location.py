@@ -16,7 +16,7 @@ def create_province(province_data: ProvinceCreate):
 
 @router.get("/{id}/districts", response_model=List[District], summary="Get all districts for a province by ID")
 def get_districts_by_province_id(id: int):
-    return LocationService.get_districts_by_province_id(id)
+    return LocationService.get_districts_by_canton_id(id)
 
 @router.post("/{id}/districts", response_model=District, summary="Create a new district for a province by ID")
 def get_districts_by_province_id(id: int, district_data: DistrictCreate):
@@ -24,7 +24,7 @@ def get_districts_by_province_id(id: int, district_data: DistrictCreate):
 
 @router.get("/{id}/cantons", response_model=List[Canton], summary="Get all cantons for a district by ID")
 def get_cantons_by_district_id(id: int):
-    return LocationService.get_cantons_by_district_id(id)
+    return LocationService.get_cantons_by_province_id(id)
 
 @router.post("/{id}/cantons", response_model=Canton, summary="Create a new canton for a district by ID")
 def get_cantons_by_district_id(id: int, canton_data: CantonCreate):
