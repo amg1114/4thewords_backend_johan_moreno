@@ -49,3 +49,17 @@ class LegendService:
             session.refresh(legend)
 
         return legend
+    
+    def delete(legend_id: int):
+        with Session(engine) as session:
+            legend = session.get(Legend, legend_id)
+            if not legend:
+                raise HTTPException(status_code=404, detail="Legend not found")
+
+            if legend.image_url:
+                ImageService.delete_image(legend.image_url)
+
+            session.delete(legend)
+            session.commit()
+            
+            return {"detail": "Legend deleted successfully"}
