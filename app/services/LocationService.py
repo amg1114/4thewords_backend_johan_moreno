@@ -5,7 +5,6 @@ from app.db.database import engine
 from app.schemas import ProvinceCreate, CantonCreate, DistrictCreate
 from app.models import Province, District, Canton
 
-
 class LocationService:
     @staticmethod
     def get_all_provinces():
@@ -40,10 +39,10 @@ class LocationService:
             return new_province
 
     @staticmethod
-    def get_cantons_by_district_id(district_id: int):
+    def get_cantons_by_province_id(province_id: int):
         with Session(engine) as session:
             cantons = session.exec(select(Canton).where(
-                Canton.district_id == district_id)).all()
+                Canton.province_id == province_id)).all()
 
             if not cantons:
                 raise HTTPException(
