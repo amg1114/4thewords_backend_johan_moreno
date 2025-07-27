@@ -4,11 +4,11 @@ from datetime import date
 
 class Legend(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
-    nombre: str
-    descripcion: str
-    fecha: date
+    name: str
+    description: str
+    date: date
     image_url: str
-    distrito_id: Optional[int] = Field(default=None, foreign_key="district.id")
-    categoria_id: Optional[int] = Field(default=None, foreign_key="category.id")
+    district_id: Optional[int] = Field(default=None, foreign_key="district.id")
+    category_id: Optional[int] = Field(default=None, foreign_key="category.id")
     publisher_id: Optional[int] = Field(default=None, foreign_key="user.id")
     
