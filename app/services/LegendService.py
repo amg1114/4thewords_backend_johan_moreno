@@ -2,10 +2,11 @@ from sqlalchemy.orm import selectinload
 from sqlmodel import Session, select
 from fastapi import HTTPException
 
-from app.models import Legend, User
-from app.schemas import LegendCreate, LegendUpdate
+from app.models import Legend, User, District, Canton
+from app.schemas import LegendCreate, LegendUpdate, LegendFilters
 from app.services.ImageService import ImageService
 from app.db.database import engine
+
 
 class LegendService:
     @staticmethod
@@ -27,7 +28,7 @@ class LegendService:
             session.refresh(legend)
 
         return legend
-    
+
     @staticmethod
     def update(legend_id: int, form_data: LegendUpdate):
         with Session(engine) as session:
@@ -50,7 +51,7 @@ class LegendService:
             session.refresh(legend)
 
         return legend
-    
+
     @staticmethod
     def delete(legend_id: int):
         with Session(engine) as session:
@@ -63,19 +64,47 @@ class LegendService:
 
             session.delete(legend)
             session.commit()
-            
+
             return {"detail": "Legend deleted successfully"}
-        
+
     @staticmethod
-    def get_all():
+    def get_all(filters: LegendFilters):
         with Session(engine) as session:
             legends = select(Legend).options(
                 selectinload(Legend.publisher),
                 selectinload(Legend.district),
+                selectinload(Legend.canton),
+                selectinload(Legend.province),
                 selectinload(Legend.category)
             )
+
+            if filters.name:
+                legends = legends.where(Legend.name.ilike(f"%{filters.name}%"))
+
+            if filters.category_id:
+                legends = legends.where(
+                    Legend.category_id == filters.category_id)
+
+            if filters.date_from:
+                legends = legends.where(Legend.date >= filters.date_from)
+
+            if filters.date_to:
+                legends = legends.where(Legend.date <= filters.date_to)
+
+            if filters.district_id:
+                legends = legends.where(
+                    Legend.district_id == filters.district_id)
+            
+            if filters.canton_id:
+                legends = legends.where(
+                    Legend.canton_id == filters.canton_id)
+            
+            if filters.province_id:
+                legends = legends.where(
+                    Legend.province_id == filters.province_id)
+
             results = session.exec(legends).all()
             if not results:
                 raise HTTPException(status_code=404, detail="No legends found")
-            
+
             return results
