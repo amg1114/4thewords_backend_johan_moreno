@@ -32,3 +32,10 @@ class ImageService:
             f.write(image.file.read())
 
         return f"{BASE_URL}/images/{filename}"
+    
+    def delete_image(image_url: str) -> None:
+        filename = image_url.split("/")[-1]
+        file_path = UPLOAD_DIR_PATH / filename
+
+        if file_path.exists():
+            os.remove(file_path)

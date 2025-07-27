@@ -1,7 +1,8 @@
 from sqlmodel import Session
+from fastapi import HTTPException
 
 from app.models import Legend, User
-from app.schemas import LegendCreate
+from app.schemas import LegendCreate, LegendUpdate
 from app.services.ImageService import ImageService
 from app.db.database import engine
 
@@ -21,6 +22,29 @@ class LegendService:
 
         with Session(engine) as session:
             session.add(legend)
+            session.commit()
+            session.refresh(legend)
+
+        return legend
+    
+    @staticmethod
+    def update(legend_id: int, form_data: LegendUpdate):
+        with Session(engine) as session:
+            legend = session.get(Legend, legend_id)
+            if not legend:
+                raise HTTPException(status_code=404, detail="Legend not found")
+
+            # Dynamic field updates
+            update_data = vars(form_data)
+            print(f"Updating legend {legend_id} with data: {update_data}")
+            for field, value in update_data.items():
+                if field == "image" and value is not None:
+                    ImageService.delete_image(legend.image_url)
+                    print(f"Updating image for legend {legend_id}")
+                    legend.image_url = ImageService.store_image(value)
+                elif hasattr(legend, field) and value is not None:
+                    setattr(legend, field, value)
+
             session.commit()
             session.refresh(legend)
 
