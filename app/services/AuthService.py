@@ -11,9 +11,7 @@ class AuthService:
         
         token_data = {"sub": user.email, "user_id": user.id}
         token = create_jwt_token(token_data)
-        return token
-        
-    
+        return token   
     
     @staticmethod
     def login(email: str, password: str) -> str:
@@ -30,6 +28,7 @@ class AuthService:
         token = create_jwt_token(token_data)
         return token
     
+    @staticmethod
     def get_current_user(token: str) -> UserRead:
         try:
             payload = decode_jwt_token(token)

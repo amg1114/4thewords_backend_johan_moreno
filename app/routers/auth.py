@@ -4,7 +4,7 @@ from app.schemas import UserCreate, UserRead, LoginSchema
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
-@router.post("/register", response_model=UserRead, summary="Register a new user and return a session token", responses={400: {"description": "Email already registered"}})
+@router.post("/register", response_model=str, summary="Register a new user and return a session token", responses={400: {"description": "Email already registered"}})
 def register(user: UserCreate):
     return AuthService.register(user)
 
