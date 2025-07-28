@@ -1,4 +1,4 @@
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends
 from app.services import AuthService
 from app.schemas import UserCreate, UserRead, LoginSchema
 
@@ -12,3 +12,7 @@ def register(user: UserCreate):
 @router.post("/login", response_model=str, summary="Login a user and return a session token", responses={401: {"description": "Invalid credentials"}})
 def login(data: LoginSchema):
     return AuthService.login(data.email, data.password)
+
+@router.get("/me", response_model=UserRead, summary="Get the current authenticated user")
+def get_current_user(current_user: UserRead = Depends(AuthService.get_current_user)):
+    return current_user
