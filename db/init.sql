@@ -83,15 +83,15 @@ INSERT INTO `user` (name, email, password) VALUES
 ('Luis Gomez', 'luis@example.com', '$2b$12$1cQR6jSeT1.1CJMlXyUSS.yJEdJtww4/pcuBEtL4L7rSetQGA/tNG');
 
 INSERT INTO legend (name, description, date, image_url, category_id, district_id, canton_id, province_id, publisher_id) VALUES
-('La carreta sin bueyes', 'Una carreta maldita que viaja sola', '2024-01-01', 'http://example.com/img1.jpg', 1, 1, 1, 1, 1),
-('El padre sin cabeza', 'Un sacerdote decapitado aparece de noche', '2024-01-02', 'http://example.com/img2.jpg', 2, 2, 2, 2, 1),
-('La Tulevieja', 'Espíritu femenino que castiga a hombres infieles', '2024-01-03', 'http://example.com/img3.jpg', 3, 3, 3, 3, 2),
-('El cadejos', 'Perro negro que sigue a los borrachos', '2024-01-04', 'http://example.com/img4.jpg', 1, 4, 4, 4, 2),
-('La llorona tica', 'Mujer que llora a sus hijos perdidos', '2024-01-05', 'http://example.com/img5.jpg', 5, 5, 5, 5, 1),
-('Los duendes del bosque', 'Criaturas traviesas en las montañas', '2024-01-06', 'http://example.com/img6.jpg', 4, 1, 1, 1, 2),
-('La monja del colegio', 'Aparece en escuelas abandonadas', '2024-01-07', 'http://example.com/img7.jpg', 2, 2, 2, 2, 1),
-('El jinete nocturno', 'Caballo fantasma sin jinete visible', '2024-01-08', 'http://example.com/img8.jpg', 3, 3, 3, 3, 1),
-('El pozo maldito', 'Lugar donde desaparecen animales', '2024-01-09', 'http://example.com/img9.jpg', 1, 4, 4, 4, 2),
-('La sombra del río', 'Figura oscura junto al agua', '2024-01-10', 'http://example.com/img10.jpg', 5, 5, 5, 5, 2);
+('La carreta sin bueyes', 'Una carreta maldita que viaja sola', '2023-01-01', 'http://localhost:8080/images/0952134b8ed24a8cb9adf6c7596bc6a7.jpg', 1, 1, 1, 1, 1),
+('El padre sin cabeza', 'Un sacerdote decapitado aparece de noche', '2022-01-02', 'http://localhost:8080/images/f086419f3d1f4d668349abc9612d32f7.jpg', 2, 2, 2, 2, 1),
+('La Tulevieja', 'Espíritu femenino que castiga a hombres infieles', '2021-01-03', 'http://localhost:8080/images/262fd081a3c445cbb8e7c493054c4107.jpg', 3, 3, 3, 3, 2),
+('El cadejos', 'Perro negro que sigue a los borrachos', '2020-01-04', 'http://localhost:8080/images/3956f481f9ba4878a5b1b5fa865bb36f.jpg', 1, 4, 4, 4, 2),
+('La llorona tica', 'Mujer que llora a sus hijos perdidos', '2019-01-05', 'http://localhost:8080/images/f363209527704e9ab1eb9dea707f30ed.webp', 5, 5, 5, 5, 1),
+('Los duendes del bosque', 'Criaturas traviesas en las montañas', '2018-01-06', 'http://localhost:8080/images/42a6338e7b7c43c39830dddfb8810afc.webp', 4, 1, 1, 1, 2),
+('La monja del colegio', 'Aparece en escuelas abandonadas', '2017-01-07', 'http://localhost:8080/images/3c482bf058fe4f09bc40e035d9650bf9.jpg', 2, 2, 2, 2, 1),
+('El jinete nocturno', 'Caballo fantasma sin jinete visible', '2016-01-08', 'http://localhost:8080/images/272aefe0e3b344b6aafe7201535f5ac4.jpg', 3, 3, 3, 3, 1),
+('El pozo maldito', 'Lugar donde desaparecen animales', '2015-01-09', 'http://localhost:8080/images/9ee875bcd3c74e43bd70ee2178980256.jpg', 1, 4, 4, 4, 2),
+('La sombra del río', 'Figura oscura junto al agua', '2014-01-10', 'http://localhost:8080/images/48abff99e9b642c882d68afa783902eb.jpg', 5, 5, 5, 5, 2);
 
 SET FOREIGN_KEY_CHECKS=1;
