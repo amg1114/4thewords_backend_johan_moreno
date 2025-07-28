@@ -1,5 +1,6 @@
 
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from contextlib import asynccontextmanager
 from app.db.database import create_db_and_tables
 
@@ -15,6 +16,8 @@ app = FastAPI(lifespan=lifespan)
 @app.get("/")
 async def root():
     return {"message": "Hello World"}
+
+app.mount("/images", StaticFiles(directory="uploads"), name="images")
 
 app.include_router(auth_router)
 app.include_router(location_router)

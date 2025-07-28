@@ -78,9 +78,9 @@ INSERT INTO category (name, description) VALUES
 ('Tradicion oral', 'Pasadas de generacion en generacion');
 
 INSERT INTO `user` (name, email, password) VALUES
-('Alejandro Moreno', 'alejandro@example.com', '123456'),
-('Ana Perez', 'ana@example.com', '123456'),
-('Luis Gomez', 'luis@example.com', '123456');
+('Alejandro Moreno', 'alejandro@example.com', '$2b$12$1cQR6jSeT1.1CJMlXyUSS.yJEdJtww4/pcuBEtL4L7rSetQGA/tNG'),
+('Ana Perez', 'ana@example.com', '$2b$12$1cQR6jSeT1.1CJMlXyUSS.yJEdJtww4/pcuBEtL4L7rSetQGA/tNG'),
+('Luis Gomez', 'luis@example.com', '$2b$12$1cQR6jSeT1.1CJMlXyUSS.yJEdJtww4/pcuBEtL4L7rSetQGA/tNG');
 
 INSERT INTO legend (name, description, date, image_url, category_id, district_id, canton_id, province_id, publisher_id) VALUES
 ('La carreta sin bueyes', 'Una carreta maldita que viaja sola', '2024-01-01', 'http://example.com/img1.jpg', 1, 1, 1, 1, 1),
