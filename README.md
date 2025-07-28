@@ -50,6 +50,16 @@ BASE_URL="http://localhost:8080"
 > Ensure the upload directory exists or will be created automatically by the app.
 
 ### 3. Install dependencies
+### 4. Start the development server
+
+To run the FastAPI server locally:
+
+```bash
+uvicorn app.main:app --reload --port 8080
+```
+
+If you change the port, make sure to also update the `BASE_URL` in your `.env` file and `VITE_API_URL` in the frontend `.env`.
+
 
 If not using Docker:
 
