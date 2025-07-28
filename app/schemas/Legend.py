@@ -3,7 +3,7 @@ from sqlmodel import SQLModel
 from typing import Annotated, Optional
 from datetime import datetime, date
 
-from app.schemas import UserRead, CategoryRead, DistrictRead
+from app.schemas import UserRead, CategoryRead, DistrictRead, CantonRead, ProvinceRead
 
 class LegendCreate:
     def __init__(
@@ -35,6 +35,8 @@ class LegendRead(SQLModel):
     publisher: Optional[UserRead]
     category: Optional[CategoryRead]
     district: Optional[DistrictRead]
+    canton: Optional[CantonRead]
+    province: Optional[ProvinceRead]
 
 def parse_legend_create(
     name: Annotated[str, Form()],

@@ -2,7 +2,7 @@ from sqlalchemy.orm import selectinload
 from sqlmodel import Session, select
 from fastapi import HTTPException
 
-from app.models import Legend, User, District, Canton
+from app.models import Legend, User, Category
 from app.schemas import LegendCreate, LegendUpdate, LegendFilters
 from app.services.ImageService import ImageService
 from app.db.database import engine
@@ -108,3 +108,31 @@ class LegendService:
                 raise HTTPException(status_code=404, detail="No legends found")
 
             return results
+    
+    @staticmethod
+    def get_by_id(legend_id: int):
+        with Session(engine) as session:
+            statement = (
+                select(Legend)
+                .where(Legend.id == legend_id)
+                .options(
+                    selectinload(Legend.publisher),
+                    selectinload(Legend.district),
+                    selectinload(Legend.canton),
+                    selectinload(Legend.province),
+                    selectinload(Legend.category),
+                )
+            )
+
+            result = session.exec(statement).first()
+            if not result:
+                raise HTTPException(status_code=404, detail="Legend not found")
+            return result
+        
+    @staticmethod
+    def get_categories():
+        with Session(engine) as session:
+            categories = session.exec(select(Category)).all()
+            if not categories:
+                raise HTTPException(status_code=404, detail="No categories found")
+            return categories
